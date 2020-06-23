@@ -1,0 +1,105 @@
+﻿<Page
+    x:Class="ColorPickerUX.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ColorPickerUX"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Resources>
+            <ThemeShadow x:Name="ShellBarShadow"/>
+            <ThemeShadow x:Name="WindowShadow"/>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="42"/>
+        </Grid.RowDefinitions>
+
+        <Image Source="/Assets/Images/wallpaper4.jpg" Stretch="UniformToFill" />
+        <Grid x:Name="ShadowReceiverGrid"/>
+        <controls:DropShadowPanel
+                                          OffsetX="0"
+                                          OffsetY="2"
+                                          BlurRadius="12"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"          
+                                          ShadowOpacity="0.4"
+                                          Color="Black">
+            <local:ColorPickerControl />
+
+
+        </controls:DropShadowPanel>
+        <Grid x:Name="Taskbar" Grid.Row="1" VerticalAlignment="Bottom" Background="{StaticResource BackdropAcrylicBrush}" Shadow="{StaticResource ShellBarShadow}">
+            <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" >
+                <Button Width="48" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <Grid Width="16" Height="16" Opacity="0.9" RowSpacing="2" ColumnSpacing="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Fill="{ThemeResource PrimaryTextColor}"/>
+                            <Rectangle Fill="{ThemeResource PrimaryTextColor}" Grid.Column="1"/>
+                            <Rectangle Fill="{ThemeResource PrimaryTextColor}" Grid.Row="1"/>
+                            <Rectangle Fill="{ThemeResource PrimaryTextColor}" Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button Width="48" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <FontIcon FontSize="20" FontWeight="Light" Glyph="&#xE721;" />
+                    </Button.Content>
+                </Button>
+                <Button Width="48" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <FontIcon FontSize="20" FontWeight="Light" Glyph="&#xE7C4;" />
+                    </Button.Content>
+                </Button>
+                <Button x:Name="TeamsAppBtn" Width="48" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <Image Source="/Assets/Images/Teams.png" Margin="8"/>
+                    </Button.Content>
+
+                </Button>
+                <Button x:Name="WeatherAppBtn" Width="48" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <Image Source="/Assets/Images/Weather.png" Margin="8,8,8,8"/>
+                    </Button.Content>
+
+                </Button>
+                <Button x:Name="WordAppBtn" Width="48" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <Image Source="/Assets/Images/Word.png" Margin="8,8,8,8"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Row="1">
+                <Button Width="32" x:Name="PowerToysButton" VerticalAlignment="Stretch" Padding="6"  Background="Transparent" Style="{StaticResource IconOnlyButton}" >
+                    <Button.Content>
+                        <Image Source="/Assets/Images/PowerToysIcon.png"  />
+                    </Button.Content>
+                </Button>
+                <Button Width="32" x:Name="AudioButton" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <FontIcon FontSize="18" Glyph="&#xE994;" />
+                    </Button.Content>
+                </Button>
+                <Button Width="32" x:Name="BatteryButton" Padding="0" Foreground="{ThemeResource PrimaryTextColor}" VerticalAlignment="Stretch" Background="Transparent" Style="{StaticResource IconOnlyButton}">
+                    <Button.Content>
+                        <FontIcon FontSize="18" FontWeight="Light" Glyph="&#xF5F9;" />
+                    </Button.Content>
+                </Button>
+                <TextBlock x:Name="TimeTextBlock" Text="08:42 PM" Foreground="{ThemeResource PrimaryTextColor}" VerticalAlignment="Center" Margin="12" FontWeight="Medium"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
