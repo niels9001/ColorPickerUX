@@ -84,11 +84,11 @@
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="52"/>
-                <RowDefinition Height="48"/>
+                <RowDefinition Height="56"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid x:Name="ShadowCastingGrid" Grid.RowSpan="3" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Stretch"/>
-            <Border x:Name="ColorRect" Height="48" Shadow="{StaticResource BackdropShadow}" Translation="0,0,32" Margin="12,0,12,0" CornerRadius="4" Grid.Row="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFc70039">
+            <Border x:Name="ColorRect" Height="56" Shadow="{StaticResource BackdropShadow}" Translation="0,0,32" Margin="12,0,12,0" CornerRadius="4" Grid.Row="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFc70039">
                 <Border.BackgroundTransition>
                     <BrushTransition Duration="0:0:1" />
                 </Border.BackgroundTransition>
@@ -115,42 +115,25 @@
                 
                 </Grid>
             </Border>
-       
 
 
-            <Pivot Grid.Row="2">
-                <!--<Pivot.HeaderTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" FontWeight="SemiBold" FontSize="14"/>
-                    </DataTemplate>
-                </Pivot.HeaderTemplate>-->
-                <PivotItem Header="Color">
+            <ScrollViewer Grid.Row="2" Margin="0,12,0,0">
+                <StackPanel Orientation="Vertical" Margin="4,-12,-4,0" Spacing="-12">
+                    <local:ColorControl DescriptionWidth="48" Description="HEX" Margin="0,-4,0,0"  x:Name="HEX" ColorCode="#FFFFFFF" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="RGB" ColorCode="213  20  48" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="HSL" x:Name="HSL" ColorCode="289*  47%  48%" Clicked="CopyToClipboard"/>
+                    <local:ColorControl DescriptionWidth="48" Description="HSB" x:Name="HSB" ColorCode="289*  47%  48%" Clicked="CopyToClipboard"/>
+                    <local:ColorControl DescriptionWidth="48" Description="XAML" x:Name="XAML" ColorCode="#FF647282" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="WPF" x:Name="WPF" ColorCode="Color.FromRGB(12, 12, 12)" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="UWP" x:Name="UWP" ColorCode="new Color() { R = 12, G = 12, B = 12 }" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="MAUI" x:Name="Maui" ColorCode="Color.FromRGB(12, 12, 12)" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="HEX" x:Name="CSSHEX" ColorCode="#647282" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="CSSRGB" ColorCode="rgb(255, 99, 71)" Clicked="CopyToClipboard" />
+                    <local:ColorControl DescriptionWidth="48" Description="HSL" x:Name="CSSHSL" ColorCode="hsl(9, 100%, 64%)" Clicked="CopyToClipboard" />
 
-                    <StackPanel Orientation="Vertical" Margin="-8,-12,-16,0" Spacing="-12">
-                        <local:ColorControl DescriptionWidth="48" Description="HEX" Margin="0,-4,0,0"  x:Name="HEX" ColorCode="#FFFFFFF" Clicked="CopyToClipboard" />
-                        <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="RGB" ColorCode="213  20  48" Clicked="CopyToClipboard" />
-                        <local:ColorControl DescriptionWidth="48" Description="HSL" x:Name="HSL" ColorCode="289*  47%  48%" Clicked="CopyToClipboard"/>
-                        <local:ColorControl DescriptionWidth="48" Description="HSB" x:Name="HSB" ColorCode="289*  47%  48%" Clicked="CopyToClipboard"/>
-                        <!--<local:ColorControl DescriptionWidth="48" Description="CMYK" x:Name="CMYK" ColorCode="22%  47%  48%  48%" />-->
-                    </StackPanel>
-                </PivotItem>
-                <PivotItem Header=".NET">
-                    <StackPanel Orientation="Vertical"  Spacing="-12" Margin="-8,-12,-16,0">
-                        <local:ColorControl DescriptionWidth="48" Description="XAML" x:Name="XAML" ColorCode="#FF647282" Clicked="CopyToClipboard" />
-                        <local:ColorControl DescriptionWidth="48" Description="WPF" x:Name="WPF" ColorCode="Color.FromRGB(12, 12, 12)" Clicked="CopyToClipboard" />
-                        <local:ColorControl DescriptionWidth="48" Description="UWP" x:Name="UWP" ColorCode="new Color() { R = 12, G = 12, B = 12 }" Clicked="CopyToClipboard" />
-                        <local:ColorControl DescriptionWidth="48" Description="MAUI" x:Name="Maui" ColorCode="Color.FromRGB(12, 12, 12)" Clicked="CopyToClipboard" />
-                    </StackPanel>
-                </PivotItem>
-                <PivotItem Header="CSS">
-                    <StackPanel Orientation="Vertical"  Spacing="-12" Margin="-8,-12,-16,0">
-                        <local:ColorControl DescriptionWidth="48" Description="HEX" x:Name="CSSHEX" ColorCode="#647282" Clicked="CopyToClipboard" />
-                        <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="CSSRGB" ColorCode="rgb(255, 99, 71)" Clicked="CopyToClipboard" />
-                        <local:ColorControl DescriptionWidth="48" Description="HSL" x:Name="CSSHSL" ColorCode="hsl(9, 100%, 64%)" Clicked="CopyToClipboard" />
-                    </StackPanel>
-                </PivotItem>
-            </Pivot>
- 
+                </StackPanel>
+            </ScrollViewer>
+      
         </Grid>
         <Border x:Name="CopyToClipboardBanner" Visibility="Collapsed" Grid.Row="1" Height="58" VerticalAlignment="Bottom" Background="{ThemeResource BackdropAcrylicBrush}" Grid.ColumnSpan="2">
             <animations:Implicit.ShowAnimations>
