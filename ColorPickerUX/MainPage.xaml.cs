@@ -50,11 +50,11 @@ namespace ColorPickerUX
                 ApplicationView appView = ApplicationView.GetForCurrentView();
                 appView.TitleBar.BackgroundColor = Colors.Transparent;
                 appView.TitleBar.ButtonBackgroundColor = Colors.Transparent;
-                appView.TitleBar.ButtonForegroundColor = Colors.Black;
-                //appView.TitleBar.ButtonForegroundColor = ((SolidColorBrush)Application.Current.Resources["PrimaryTextColor"]).Color;
+                appView.TitleBar.ButtonForegroundColor = Colors.Transparent;
+             
                 appView.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
                 appView.TitleBar.InactiveBackgroundColor = Colors.Transparent;
-                appView.TitleBar.ForegroundColor = Colors.Black;
+                appView.TitleBar.ForegroundColor = Colors.Transparent;
                 id = ApplicationView.GetForCurrentView().Id;
             });
 

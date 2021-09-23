@@ -18,23 +18,16 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="42"/>
+            <RowDefinition Height="0"/>
         </Grid.RowDefinitions>
 
         <Image Source="/Assets/Images/wallpaper4.jpg" Stretch="UniformToFill" />
         <Grid x:Name="ShadowReceiverGrid"/>
-        <controls:DropShadowPanel
-                                          OffsetX="0"
-                                          OffsetY="2"
-                                          BlurRadius="12"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"          
-                                          ShadowOpacity="0.4"
-                                          Color="Black">
-            <local:ColorPickerControl />
+        
+            <local:ColorPickerControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
 
-        </controls:DropShadowPanel>
+     
         <Grid x:Name="Taskbar" Grid.Row="1" VerticalAlignment="Bottom" Background="{StaticResource BackdropAcrylicBrush}" Shadow="{StaticResource ShellBarShadow}">
             <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal" >
                 <Button Width="48" Padding="0" VerticalAlignment="Stretch" Background="Transparent" Foreground="{ThemeResource PrimaryTextColor}" Style="{StaticResource IconOnlyButton}">
