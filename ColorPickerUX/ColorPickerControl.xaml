@@ -20,7 +20,7 @@
         </ControlTemplate>
    
     </UserControl.Resources>
-    <Grid x:Name="LayoutRoot" Background="{ThemeResource BackdropAcrylicBrush}"  CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+    <Grid x:Name="LayoutRoot" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <!--<Grid.Clip>
             <RectangleGeometry Rect="0 0 400 340"/>
         </Grid.Clip>-->
@@ -32,79 +32,52 @@
             <ColumnDefinition Width="64"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>-->
-        <muxc:NavigationView PaneDisplayMode="Top" IsPaneToggleButtonVisible="False" IsSettingsVisible="False" Margin="0,36,0,0" IsBackButtonVisible="Collapsed">
-
-            <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem Margin="96,0,0,0">
-                    <muxc:NavigationViewItem.Content>
-                        <Ellipse Width="24" Height="24" Fill="{ThemeResource SystemAccentColorLight3}"     />
-                    </muxc:NavigationViewItem.Content>
-                </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem>
-                    <muxc:NavigationViewItem.Content>
-                        <Ellipse Width="24" Height="24" Fill="{ThemeResource SystemAccentColorLight2}"   />
-                    </muxc:NavigationViewItem.Content>
-                </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem>
-                    <muxc:NavigationViewItem.Content>
-                        <Ellipse Width="24" Height="24" Fill="{ThemeResource SystemAccentColorLight1}"  />
-                    </muxc:NavigationViewItem.Content>
-                </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem>
-                    <muxc:NavigationViewItem.Content>
-                        <Ellipse Width="24" Height="24" Fill="{ThemeResource SystemAccentColorDark1}"   />
-                    </muxc:NavigationViewItem.Content>
-                </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem>
-                    <muxc:NavigationViewItem.Content>
-                        <Ellipse Width="24" Height="24" Fill="{ThemeResource SystemAccentColorDark2}"  />
-                    </muxc:NavigationViewItem.Content>
-                </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem>
-                    <muxc:NavigationViewItem.Content>
-                        <Ellipse Width="24" Height="24" Fill="{ThemeResource SystemAccentColorDark3}" />
-                    </muxc:NavigationViewItem.Content>
-                </muxc:NavigationViewItem>
-
-            </muxc:NavigationView.MenuItems>
-        </muxc:NavigationView>
+      
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="12,8,8,8">
             <Image Source="ms-appx:///Assets/Images/Color Picker.png" Width="16" />
             <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="12,0,0,0" Text="Color Picker" />
         </StackPanel>
-        <Button Margin="0,0,-8,0" Background="Transparent" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Right">
+        <!--<Button Margin="0,0,-8,0" Background="Transparent" BorderThickness="0" VerticalAlignment="Top" HorizontalAlignment="Right">
             <Button.Content>
                 <FontIcon FontFamily="Segoe Fluent Icons" Height="32" Width="32" FontSize="12" Glyph="&#xE8BB;"/>
             </Button.Content>
-        </Button>
-        <StackPanel Margin="12,40,0,0" Spacing="8" Orientation="Horizontal" VerticalAlignment="Top" >
+        </Button>-->
 
-            <Button Height="40">
+        <Grid Margin="0,56,0,0" ColumnSpacing="8" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Margin="12,0,0,0" Grid.Column="0" Height="40">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <TextBlock FontFamily="Segoe Fluent Icons" Foreground="{ThemeResource SystemAccentColorLight2}" VerticalAlignment="Center" Margin="0,0,0,0" Text="&#xEF3C;" />
                     <TextBlock Text="New" />
                 </StackPanel>
             </Button>
-            <AppBarSeparator />
-        </StackPanel>
-
-        <Button x:Name="ColorPickerButton" Width="20" Height="20"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ColorPickerButton_Click">
-            <Button.Content>
-                <FontIcon FontFamily="Segoe MDL2 Assets" FontSize="16" Glyph="&#xEF3C;"/>
-            </Button.Content>
-        </Button>
-        <Grid x:Name="BackgroundColorGrid" Visibility="Collapsed" Grid.Column="1" Grid.RowSpan="2" Background="{ThemeResource DialogBackgroundBrush}"/>
-
-
-
-
-
-        <Grid Grid.Row="1" >
-            <ListView x:Name="ColorsListView" Visibility="Collapsed"  Margin="0,12,0,0" SelectionChanged="ColorsListView_SelectionChanged" ItemContainerStyle="{StaticResource ListViewItemContainerStyle1}" Grid.Row="1" ItemsSource="{x:Bind PickedColors}" extensions:ListViewExtensions.StretchItemContainerDirection="Both">
+            <AppBarSeparator Grid.Column="1" />
+            <ListView x:Name="ColorsListView" Grid.Column="2" SelectionChanged="ColorsListView_SelectionChanged" ItemsSource="{x:Bind PickedColors}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="Color">
-                        <Grid Width="64" Height="48">
-                            <controls:DropShadowPanel
+                        <Grid>
+                            <Ellipse Width="24" Height="24">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{Binding}" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--<ListView   Margin="0,12,0,0"  ItemContainerStyle="{StaticResource ListViewItemContainerStyle1}" Grid.Row="1"  extensions:ListViewExtensions.StretchItemContainerDirection="Both">
+         
+                    <Grid Width="64" Height="48">
+                        <controls:DropShadowPanel
                                           OffsetX="0"
                                           OffsetY="2"
                                           BlurRadius="12"
@@ -112,29 +85,44 @@
                                           VerticalAlignment="Center"          
                                           ShadowOpacity="0.2"
                                           Color="Black">
-                                <Border Width="24" Height="24" CornerRadius="4">
+                            <Border Width="24" Height="24" CornerRadius="4">
                                 <Border.Background>
                                     <SolidColorBrush Color="{Binding}" />
                                 </Border.Background>
                             </Border>
-                            </controls:DropShadowPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </controls:DropShadowPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
         </Grid>
+        <StackPanel Margin="12,56,0,0" Spacing="8" Orientation="Horizontal" VerticalAlignment="Top" >
+
+         
+        </StackPanel>
+
+        <Button x:Name="ColorPickerButton" Width="20" Height="20"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ColorPickerButton_Click">
+            <Button.Content>
+                <FontIcon FontFamily="Segoe MDL2 Assets" FontSize="16" Glyph="&#xEF3C;"/>
+            </Button.Content>
+        </Button>
+      
+
+
+
+
+
+   
       
         <Grid Grid.Column="1"  Grid.Row="0"  Grid.RowSpan="2" >
-            <Grid.Resources>
-                <ThemeShadow x:Name="BackdropShadow"/>
-            </Grid.Resources>
+         
             <Grid.RowDefinitions>
                 <RowDefinition Height="52"/>
                 <RowDefinition Height="56"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="ShadowCastingGrid" Grid.RowSpan="3" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Stretch"/>
-            <Border x:Name="ColorRect" Visibility="Collapsed" Height="56" Shadow="{StaticResource BackdropShadow}" Translation="0,0,32" Margin="12,0,12,0" CornerRadius="4" Grid.Row="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFc70039">
+        
+            <Border x:Name="ColorRect" Visibility="Collapsed" Height="56"  Translation="0,0,32" Margin="12,0,12,0" CornerRadius="4" Grid.Row="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFc70039">
                 <Border.BackgroundTransition>
                     <BrushTransition Duration="0:0:1" />
                 </Border.BackgroundTransition>
@@ -162,8 +150,10 @@
                 </Grid>
             </Border>
 
-
-            <ScrollViewer Grid.Row="2" Margin="0,12,0,0">
+            <Grid  Grid.Row="2" Background="{ThemeResource  LayerFillColorDefaultBrush}">
+                
+            
+            <ScrollViewer Margin="0,12,0,0">
                 <StackPanel Orientation="Vertical" Margin="4,-12,-4,0" Spacing="-12">
                     <local:ColorControl DescriptionWidth="48" Description="HEX" Margin="0,-4,0,0"  x:Name="HEX" ColorCode="#FFFFFFF" Clicked="CopyToClipboard" />
                     <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="RGB" ColorCode="213  20  48" Clicked="CopyToClipboard" />
@@ -176,11 +166,12 @@
                     <local:ColorControl DescriptionWidth="48" Description="HEX" x:Name="CSSHEX" ColorCode="#647282" Clicked="CopyToClipboard" />
                     <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="CSSRGB" ColorCode="rgb(255, 99, 71)" Clicked="CopyToClipboard" />
                     <local:ColorControl DescriptionWidth="48" Description="HSL" x:Name="CSSHSL" ColorCode="hsl(9, 100%, 64%)" Clicked="CopyToClipboard" />
-
                 </StackPanel>
             </ScrollViewer>
-      
+            </Grid>
         </Grid>
+        
+        
         <Border x:Name="CopyToClipboardBanner" Visibility="Collapsed" Grid.Row="1" Height="58" VerticalAlignment="Bottom" Background="{ThemeResource BackdropAcrylicBrush}" Grid.ColumnSpan="2">
             <animations:Implicit.ShowAnimations>
                     <animations:TranslationAnimation Duration="0:0:0.350" From="0, 48, 0" To="0" />

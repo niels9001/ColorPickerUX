@@ -12,7 +12,7 @@
                             <ThemeShadow x:Name="BackdropShadow"/>
                         </Grid.Resources>
                         <Grid x:Name="ShadowCastGrid"/>
-                        <Border x:Name="ControlBorder" HorizontalAlignment="Stretch" Shadow="{StaticResource BackdropShadow}" Translation="0,0,12"  Background="{ThemeResource ColorControlBackgroundBrush}" Height="36" CornerRadius="4" Margin="8,16,16,8" Padding="8">
+                        <Border x:Name="ControlBorder" HorizontalAlignment="Stretch"  Translation="0,0,12"  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="36" CornerRadius="4" Margin="8,16,16,8" Padding="8">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition x:Name="ColDef" Width="{TemplateBinding DescriptionWidth}"/>

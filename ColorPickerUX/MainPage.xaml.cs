@@ -30,8 +30,7 @@ namespace ColorPickerUX
         public MainPage()
         {
             this.InitializeComponent();
-            ShellBarShadow.Receivers.Add(ShadowReceiverGrid);
-            WindowShadow.Receivers.Add(ShadowReceiverGrid);
+
         }
 
         private async Task<bool> OpenPageAsWindowAsync(Type t)

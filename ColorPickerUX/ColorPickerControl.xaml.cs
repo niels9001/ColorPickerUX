@@ -32,7 +32,7 @@ namespace ColorPickerUX
         public ColorPickerControl()
         {
             this.InitializeComponent();
-            BackdropShadow.Receivers.Add(ShadowCastingGrid);
+
             PickedColors = new ObservableCollection<Color>();
 
         }
