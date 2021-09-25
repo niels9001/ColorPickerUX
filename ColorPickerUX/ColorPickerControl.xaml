@@ -173,9 +173,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>-->
             </ListView>
-            <Button HorizontalAlignment="Right" FontFamily="Segoe Fluent Icons" Margin="0,0,20,0" Grid.Column="3" Background="Transparent" Height="36" BorderBrush="Transparent" BorderThickness="1">
+            <Button HorizontalAlignment="Right" FontFamily="Segoe Fluent Icons" Margin="0,0,18,0" Grid.Column="3" Background="Transparent" Height="36" BorderBrush="Transparent" BorderThickness="1">
                 <Button.Content>
-                    <muxc:AnimatedIcon x:Name="SearchAnimatedIcon">
+                    <muxc:AnimatedIcon Height="18" x:Name="SearchAnimatedIcon">
                         <muxc:AnimatedIcon.Source>
                             <animatedvisuals:AnimatedSettingsVisualSource/>
                         </muxc:AnimatedIcon.Source>
@@ -195,7 +195,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border x:Name="ColorRect" Visibility="Visible" HorizontalAlignment="Left" Width="12" Margin="16,24,0,16" CornerRadius="4" Grid.Row="2"  Background="#FFc70039">
+            <Border x:Name="ColorRect" Visibility="Visible" HorizontalAlignment="Left" Width="12" Margin="16,28,0,12" CornerRadius="4" Grid.Row="2"  Background="#FFc70039">
                 <Border.BackgroundTransition>
                     <BrushTransition />
                 </Border.BackgroundTransition>
@@ -210,7 +210,7 @@
                     </Grid.RowDefinitions>
                     <Button Grid.Row="2" Opacity="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Button.Flyout>
-                            <Flyout>
+                            <Flyout ShouldConstrainToRootBounds="False">
                                 <muxc:ColorPicker x:Name="ColorPicker" Color="#FFc70039" Orientation="Horizontal" IsMoreButtonVisible="True" PointerCaptureLost="ColorPicker_PointerCaptureLost"/>
                             </Flyout>
                         </Button.Flyout>
