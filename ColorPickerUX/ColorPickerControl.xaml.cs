@@ -81,29 +81,31 @@ namespace ColorPickerUX
         {
             ColorPicker.Color = SelectedColor;
             ColorRect.Background = new SolidColorBrush(SelectedColor);
-            HEX.ColorCode = "#" + SelectedColor.ToHex().Remove(0, 3);
-            RGB.ColorCode = SelectedColor.R + "  " + SelectedColor.G + "  " + SelectedColor.B;
+
+            List<ColorCode> ColorFormats = new List<ColorCode>();
+            ColorFormats.Add(new ColorCode() { Name = "HEX", Format = "#" + SelectedColor.ToHex().Remove(0, 3) });
+            ColorFormats.Add(new ColorCode() { Name = "RGB", Format = SelectedColor.R + "  " + SelectedColor.G + "  " + SelectedColor.B });
 
             HslColor SelectedHSLColor = SelectedColor.ToHsl();
-            HSL.ColorCode = Math.Round(SelectedHSLColor.H, 0) + "°  " + Math.Round(SelectedHSLColor.S, 0) + "%  " + Math.Round(SelectedHSLColor.L, 0) + "%";
+            ColorFormats.Add(new ColorCode() { Name = "HSL", Format = Math.Round(SelectedHSLColor.H, 0) + "°  " + Math.Round(SelectedHSLColor.S, 0) + "%  " + Math.Round(SelectedHSLColor.L, 0) + "%" });
 
             HsvColor SelectedHSVColor = SelectedColor.ToHsv();
-            HSB.ColorCode = Math.Round(SelectedHSVColor.H, 0) + "°  " + Math.Round(SelectedHSVColor.S, 0) + "%  " + Math.Round(SelectedHSVColor.V, 0) + "%";
+            ColorFormats.Add(new ColorCode() { Name = "HSB", Format = Math.Round(SelectedHSVColor.H, 0) + "°  " + Math.Round(SelectedHSVColor.S, 0) + "%  " + Math.Round(SelectedHSVColor.V, 0) + "%" });
 
-            XAML.ColorCode = SelectedColor.ToHex();
-            WPF.ColorCode = "Color.FromRGB(" + SelectedColor.R + ", " + SelectedColor.G + ", " + SelectedColor.B + ")";
-            UWP.ColorCode = "new Color() { R = " + SelectedColor.R + ", G = " + SelectedColor.G + ", B = " + SelectedColor.B + "}";
-            Maui.ColorCode = "Color.FromRGB(" + SelectedColor.R + ", " + SelectedColor.G + ", " + SelectedColor.B + ")";
+            ColorFormats.Add(new ColorCode() { Name = "XAML", Format = SelectedColor.ToHex() });
+            ColorFormats.Add(new ColorCode() { Name = "C#", Format = "new Color() { R = " + SelectedColor.R + ", G = " + SelectedColor.G + ", B = " + SelectedColor.B + "}" });
 
-            CSSHEX.ColorCode = "#" + SelectedColor.ToHex().Remove(0, 3);
-            CSSRGB.ColorCode = "rgb(" + SelectedColor.R + ", " + SelectedColor.G + ", " + SelectedColor.B + ")";
-            CSSHSL.ColorCode = "hsl(" + SelectedColor.R + ", " + SelectedColor.G + "%, " + SelectedColor.B + "%)";
+            ColorFormats.Add(new ColorCode() { Name = "CSS HEX", Format = "#" + SelectedColor.ToHex().Remove(0, 3) });
+            ColorFormats.Add(new ColorCode() { Name = "CSS RGB", Format = "rgb(" + SelectedColor.R + ", " + SelectedColor.G + ", " + SelectedColor.B + ")" });
+            ColorFormats.Add(new ColorCode() { Name = "CSS HSL", Format = "hsl(" + SelectedColor.R + ", " + SelectedColor.G + "%, " + SelectedColor.B + "%)" });
+            ColorFormatsList.ItemsSource = ColorFormats;
 
 
-            Gradient1.Fill = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Max(SelectedHSVColor.V + 0.3)));
-            Gradient2.Fill = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Max(SelectedHSVColor.V + 0.15)));
-            Gradient3.Fill = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Min(SelectedHSVColor.V - 0.2)));
-            Gradient4.Fill = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Min(SelectedHSVColor.V - 0.3)));
+            Icon.Foreground = new SolidColorBrush(SelectedColor);
+            Gradient1.Background = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Max(SelectedHSVColor.V + 0.3)));
+            Gradient2.Background = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Max(SelectedHSVColor.V + 0.15)));
+            Gradient3.Background = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Min(SelectedHSVColor.V - 0.2)));
+            Gradient4.Background = new SolidColorBrush(ColorHelper.FromHsv(SelectedHSVColor.H, SelectedHSVColor.S, Min(SelectedHSVColor.V - 0.3)));
 
         }
 
@@ -149,9 +151,9 @@ namespace ColorPickerUX
 
         private void Gradient_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            Rectangle R = sender as Rectangle;
+            Border R = sender as Border;
 
-            AddColor(((SolidColorBrush)R.Fill).Color);
+            AddColor(((SolidColorBrush)R.Background).Color);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -159,5 +161,16 @@ namespace ColorPickerUX
             AddColor(new Color() { R = 134, G = 163, B = 195, A = 255 }); ;
             AddColor(new Color() { R = 182, G = 206, B = 199, A = 255 });
         }
+
+        private void CopyToClipboard_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
+
+    public class ColorCode
+    {
+        public string Name { get; set; }
+        public string Format { get; set; }
     }
 }

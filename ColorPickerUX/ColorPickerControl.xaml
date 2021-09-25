@@ -8,7 +8,7 @@
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
         xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations" xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d" Loaded="UserControl_Loaded"
     CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
   >
@@ -18,22 +18,119 @@
                 <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"/>
             </Grid>
         </ControlTemplate>
-   
+        <Style x:Key="ListViewItemContainerStyle2" TargetType="ListViewItem">
+            <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
+            <Setter Property="Background" Value="{ThemeResource NavigationViewItemBackground}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource NavigationViewItemBorderBrush}" />
+            <Setter Property="BorderThickness" Value="{StaticResource NavigationViewItemBorderThickness}" />
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals" Value="True" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Grid
+                            Width="36" Height="34"
+                        x:Name="LayoutRoot" 
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Margin="0"
+                   
+                        Control.IsTemplateFocusTarget="True">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="PointerStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Target="SelectionStroke.Opacity" Value="0" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource TopNavigationViewItemBackgroundPointerOver}" />
+                                            <Setter Target="PointerRectangle.Fill" Value="{ThemeResource NavigationViewItemBackgroundPointerOver}" />
+                                            <Setter Target="SelectionStroke.Opacity" Value="0" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource TopNavigationViewItemBackgroundPressed}" />
+                                            <Setter Target="PointerRectangle.Fill" Value="{ThemeResource NavigationViewItemBackgroundPressed}" />
+                                            <Setter Target="SelectionStroke.Opacity" Value="0" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource TopNavigationViewItemBackgroundSelected}" />
+                                            <Setter Target="PointerRectangle.Fill" Value="Transparent" />
+                                            <Setter Target="SelectionStroke.Opacity" Value="0.6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOverSelected">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource TopNavigationViewItemBackgroundSelectedPointerOver}" />
+                                            <Setter Target="PointerRectangle.Fill" Value="{ThemeResource NavigationViewItemBackgroundSelectedPointerOver}" />
+                                            <Setter Target="SelectionStroke.Opacity" Value="0.6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PressedSelected">
+                                        <VisualState.Setters>
+                                            <Setter Target="LayoutRoot.Background" Value="{ThemeResource TopNavigationViewItemBackgroundSelectedPressed}" />
+                                            <Setter Target="PointerRectangle.Fill" Value="Transparent" />
+                                            <Setter Target="SelectionStroke.Opacity" Value="0.6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DisabledStates">
+                                    <VisualState x:Name="Enabled"/>
+                                    <VisualState x:Name="Disabled">
+                                      
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle 
+                                RadiusX="4"
+                                RadiusY="4"
+                                x:Name="PointerRectangle"
+                                Fill="Transparent" />
+                            <Ellipse Width="28" x:Name="SelectionStroke" StrokeThickness="2" Height="28" Opacity="0">
+                                <Ellipse.OpacityTransition>
+                                    <ScalarTransition />
+                                </Ellipse.OpacityTransition>
+
+                                <Ellipse.Stroke>
+                                    <SolidColorBrush Color="{Binding}" />
+                                </Ellipse.Stroke>
+                            </Ellipse>
+
+                            <Ellipse Width="20" Height="20">
+                                <Ellipse.Fill>
+                                    <SolidColorBrush Color="{Binding}" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
-    <Grid x:Name="LayoutRoot" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        <!--<Grid.Clip>
-            <RectangleGeometry Rect="0 0 400 340"/>
-        </Grid.Clip>-->
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
+    <Grid x:Name="LayoutRoot" RowSpacing="6" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="64"/>
             <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>-->
+        </Grid.ColumnDefinitions>
       
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="12,8,8,8">
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="16,8,8,8">
             <Image Source="ms-appx:///Assets/Images/Color Picker.png" Width="16" />
             <TextBlock Style="{StaticResource CaptionTextBlockStyle}" Margin="12,0,0,0" Text="Color Picker" />
         </StackPanel>
@@ -43,26 +140,28 @@
             </Button.Content>
         </Button>-->
 
-        <Grid Margin="0,56,0,0" ColumnSpacing="8" VerticalAlignment="Top">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2"  ColumnSpacing="8" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Margin="12,0,0,0" Grid.Column="0" Height="40">
-                <StackPanel Orientation="Horizontal" Spacing="8">
-                    <TextBlock FontFamily="Segoe Fluent Icons" Foreground="{ThemeResource SystemAccentColorLight2}" VerticalAlignment="Center" Margin="0,0,0,0" Text="&#xEF3C;" />
+            <Button Click="ColorPickerButton_Click" Margin="16,0,0,0" Grid.Column="0" Height="36">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock x:Name="Icon" FontFamily="Segoe Fluent Icons" Foreground="{ThemeResource SystemAccentColorLight2}" VerticalAlignment="Center" Margin="0,0,0,0" Text="&#xEF3C;">
+                    </TextBlock>
                     <TextBlock Text="New" />
                 </StackPanel>
             </Button>
             <AppBarSeparator Grid.Column="1" />
-            <ListView x:Name="ColorsListView" Grid.Column="2" SelectionChanged="ColorsListView_SelectionChanged" ItemsSource="{x:Bind PickedColors}">
+            <ListView ItemContainerStyle="{StaticResource ListViewItemContainerStyle2}" x:Name="ColorsListView" Grid.Column="2" Grid.Row="2" SelectionChanged="ColorsListView_SelectionChanged" ItemsSource="{x:Bind PickedColors}">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
+                <!--<ListView.ItemTemplate>
                     <DataTemplate x:DataType="Color">
                         <Grid>
                             <Ellipse Width="24" Height="24">
@@ -72,103 +171,93 @@
                             </Ellipse>
                         </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </ListView.ItemTemplate>-->
             </ListView>
-            <!--<ListView   Margin="0,12,0,0"  ItemContainerStyle="{StaticResource ListViewItemContainerStyle1}" Grid.Row="1"  extensions:ListViewExtensions.StretchItemContainerDirection="Both">
-         
-                    <Grid Width="64" Height="48">
-                        <controls:DropShadowPanel
-                                          OffsetX="0"
-                                          OffsetY="2"
-                                          BlurRadius="12"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"          
-                                          ShadowOpacity="0.2"
-                                          Color="Black">
-                            <Border Width="24" Height="24" CornerRadius="4">
-                                <Border.Background>
-                                    <SolidColorBrush Color="{Binding}" />
-                                </Border.Background>
-                            </Border>
-                        </controls:DropShadowPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
+            <Button HorizontalAlignment="Right" FontFamily="Segoe Fluent Icons" Margin="0,0,20,0" Grid.Column="3" Background="Transparent" Height="36" BorderBrush="Transparent" BorderThickness="1">
+                <Button.Content>
+                    <muxc:AnimatedIcon x:Name="SearchAnimatedIcon">
+                        <muxc:AnimatedIcon.Source>
+                            <animatedvisuals:AnimatedSettingsVisualSource/>
+                        </muxc:AnimatedIcon.Source>
+                        <muxc:AnimatedIcon.FallbackIconSource>
+                            <muxc:SymbolIconSource Symbol="Find"/>
+                        </muxc:AnimatedIcon.FallbackIconSource>
+                    </muxc:AnimatedIcon>
+
+                </Button.Content>
+            </Button>
         </Grid>
-        <StackPanel Margin="12,56,0,0" Spacing="8" Orientation="Horizontal" VerticalAlignment="Top" >
-
-         
-        </StackPanel>
-
-        <Button x:Name="ColorPickerButton" Width="20" Height="20"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ColorPickerButton_Click">
-            <Button.Content>
-                <FontIcon FontFamily="Segoe MDL2 Assets" FontSize="16" Glyph="&#xEF3C;"/>
-            </Button.Content>
-        </Button>
-      
 
 
 
-
-
-   
-      
-        <Grid Grid.Column="1"  Grid.Row="0"  Grid.RowSpan="2" >
-         
-            <Grid.RowDefinitions>
-                <RowDefinition Height="52"/>
-                <RowDefinition Height="56"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-        
-            <Border x:Name="ColorRect" Visibility="Collapsed" Height="56"  Translation="0,0,32" Margin="12,0,12,0" CornerRadius="4" Grid.Row="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFc70039">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,0" CornerRadius="0,0,0,0" BorderThickness="0,1,0,0" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" Background="{ThemeResource LayerFillColorDefaultBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="ColorRect" Visibility="Visible" HorizontalAlignment="Left" Width="12" Margin="16,24,0,16" CornerRadius="4" Grid.Row="2"  Background="#FFc70039">
                 <Border.BackgroundTransition>
-                    <BrushTransition Duration="0:0:1" />
+                    <BrushTransition />
                 </Border.BackgroundTransition>
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="12*"/>
-                        <ColumnDefinition Width="12*"/>
-                        <ColumnDefinition Width="50*"/>
-                      
-                        <ColumnDefinition Width="12*"/>
-                        <ColumnDefinition Width="12*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="2" Opacity="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="50*"/>
+
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="12*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="2" Opacity="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Button.Flyout>
                             <Flyout>
-                                <ColorPicker x:Name="ColorPicker" Color="#FFc70039" IsMoreButtonVisible="True" PointerCaptureLost="ColorPicker_PointerCaptureLost"/>
+                                <muxc:ColorPicker x:Name="ColorPicker" Color="#FFc70039" Orientation="Horizontal" IsMoreButtonVisible="True" PointerCaptureLost="ColorPicker_PointerCaptureLost"/>
                             </Flyout>
                         </Button.Flyout>
                     </Button>
-                    <Rectangle x:Name="Gradient1" PointerPressed="Gradient_PointerPressed" Fill="#FFffc301" Grid.Column="0"/>
-                    <Rectangle x:Name="Gradient2" PointerPressed="Gradient_PointerPressed" Fill="#FFff5733" Grid.Column="1"/>
-                    <Rectangle x:Name="Gradient3" PointerPressed="Gradient_PointerPressed" Fill="#FF910d3f" Grid.Column="3"/>
-                    <Rectangle x:Name="Gradient4" PointerPressed="Gradient_PointerPressed" Fill="#FF5a1846" Grid.Column="4"/>
-                
+                    <Border x:Name="Gradient1" PointerPressed="Gradient_PointerPressed" Background="#FFffc301" Grid.Row="0">
+                        <Border.BackgroundTransition>
+                            <BrushTransition />
+                        </Border.BackgroundTransition>
+                    </Border>
+                    <Border x:Name="Gradient2" PointerPressed="Gradient_PointerPressed" Background="#FFff5733" Grid.Row="1">
+                        <Border.BackgroundTransition>
+                            <BrushTransition />
+                        </Border.BackgroundTransition>
+                    </Border>
+                    <Border x:Name="Gradient3" PointerPressed="Gradient_PointerPressed" Background="#FF910d3f" Grid.Row="3">
+                        <Border.BackgroundTransition>
+                            <BrushTransition />
+                        </Border.BackgroundTransition>
+                    </Border>
+                    <Border x:Name="Gradient4" PointerPressed="Gradient_PointerPressed" Background="#FF5a1846" Grid.Row="4">
+                        <Border.BackgroundTransition>
+                            <BrushTransition />
+                        </Border.BackgroundTransition>
+                    </Border>
+
                 </Grid>
             </Border>
+            <ListView x:Name="ColorFormatsList" SelectionMode="None" Margin="0,16,0,0" Grid.Column="1">
+                <ListView.Transitions>
+                    
+                </ListView.Transitions>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ColorCode">
+                        <Grid CornerRadius="4" Margin="0,12,0,0" Padding="4" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="78" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="48" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock FontWeight="SemiBold" Margin="12,0,0,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind Name}" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                            <TextBlock VerticalAlignment="Center" Text="{x:Bind Format}" Grid.Column="1" IsTextSelectionEnabled="True" FontWeight="SemiBold" />
+                            <Button HorizontalAlignment="Right" x:Name="CopyToClipboard" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Grid.Column="2" Click="CopyToClipboard_Click" FontFamily="Segoe Fluent Icons" Content="&#xE16F;" Background="Transparent" Height="36" BorderBrush="Transparent" BorderThickness="1" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-            <Grid  Grid.Row="2" Background="{ThemeResource  LayerFillColorDefaultBrush}">
-                
-            
-            <ScrollViewer Margin="0,12,0,0">
-                <StackPanel Orientation="Vertical" Margin="4,-12,-4,0" Spacing="-12">
-                    <local:ColorControl DescriptionWidth="48" Description="HEX" Margin="0,-4,0,0"  x:Name="HEX" ColorCode="#FFFFFFF" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="RGB" ColorCode="213  20  48" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="HSL" x:Name="HSL" ColorCode="289*  47%  48%" Clicked="CopyToClipboard"/>
-                    <local:ColorControl DescriptionWidth="48" Description="HSB" x:Name="HSB" ColorCode="289*  47%  48%" Clicked="CopyToClipboard"/>
-                    <local:ColorControl DescriptionWidth="48" Description="XAML" x:Name="XAML" ColorCode="#FF647282" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="WPF" x:Name="WPF" ColorCode="Color.FromRGB(12, 12, 12)" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="UWP" x:Name="UWP" ColorCode="new Color() { R = 12, G = 12, B = 12 }" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="MAUI" x:Name="Maui" ColorCode="Color.FromRGB(12, 12, 12)" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="HEX" x:Name="CSSHEX" ColorCode="#647282" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="RGB" x:Name="CSSRGB" ColorCode="rgb(255, 99, 71)" Clicked="CopyToClipboard" />
-                    <local:ColorControl DescriptionWidth="48" Description="HSL" x:Name="CSSHSL" ColorCode="hsl(9, 100%, 64%)" Clicked="CopyToClipboard" />
-                </StackPanel>
-            </ScrollViewer>
-            </Grid>
+            </ListView>
         </Grid>
         
         

@@ -12,14 +12,14 @@
                             <ThemeShadow x:Name="BackdropShadow"/>
                         </Grid.Resources>
                         <Grid x:Name="ShadowCastGrid"/>
-                        <Border x:Name="ControlBorder" HorizontalAlignment="Stretch"  Translation="0,0,12"  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="36" CornerRadius="4" Margin="8,16,16,8" Padding="8">
+                        <Border x:Name="ControlBorder" HorizontalAlignment="Stretch"  Translation="0,0,12"  Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Height="40" CornerRadius="4" Margin="8,16,16,8" Padding="8">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition x:Name="ColDef" Width="{TemplateBinding DescriptionWidth}"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{TemplateBinding Description}" Opacity="0.4" FontWeight="SemiBold" FontSize="12" VerticalAlignment="Center"/>
-                                <TextBlock Text="{TemplateBinding ColorCode}" FontFamily="Consolas" Grid.Column="1" FontSize="14" Margin="0,-2,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="{TemplateBinding ColorCode}" Grid.Column="1" FontWeight="SemiBold" Margin="0,-2,0,0" VerticalAlignment="Center"/>
                             </Grid>
                         </Border>
                     </Grid>
