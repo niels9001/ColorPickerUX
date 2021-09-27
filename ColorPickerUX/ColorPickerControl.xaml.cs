@@ -170,7 +170,7 @@ namespace ColorPickerUX
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e)
         {
-
+            CopyToClipboardBanner.Visibility = Visibility.Visible;
         }
     }
 
