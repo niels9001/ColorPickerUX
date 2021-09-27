@@ -62,7 +62,7 @@ namespace ColorPickerUX
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await OpenPageAsWindowAsync(typeof(Settings));
+            // await OpenPageAsWindowAsync(typeof(Settings));
         }
     }
 }

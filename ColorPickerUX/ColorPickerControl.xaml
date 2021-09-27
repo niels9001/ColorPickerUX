@@ -147,7 +147,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Click="ColorPickerButton_Click" Margin="16,0,0,0" Grid.Column="0" Height="36">
+            <Button Click="ColorPickerButton_Click" Margin="16,0,6,0" Grid.Column="0" Height="36">
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <TextBlock x:Name="Icon" FontFamily="Segoe Fluent Icons" Foreground="{ThemeResource SystemAccentColorLight2}" VerticalAlignment="Center" Margin="0,0,0,0" Text="&#xEF3C;">
                     </TextBlock>
@@ -173,9 +173,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>-->
             </ListView>
-            <Button HorizontalAlignment="Right" FontFamily="Segoe Fluent Icons" Margin="0,0,18,0" Grid.Column="3" Background="Transparent" Height="36" BorderBrush="Transparent" BorderThickness="1">
+            <Button HorizontalAlignment="Right" FontFamily="Segoe Fluent Icons" Margin="0,0,16,0" Grid.Column="3" Background="Transparent" Height="36" BorderBrush="Transparent" BorderThickness="1">
                 <Button.Content>
-                    <muxc:AnimatedIcon Height="18" x:Name="SearchAnimatedIcon">
+                    <muxc:AnimatedIcon Height="16" x:Name="SearchAnimatedIcon">
                         <muxc:AnimatedIcon.Source>
                             <animatedvisuals:AnimatedSettingsVisualSource/>
                         </muxc:AnimatedIcon.Source>
@@ -195,7 +195,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border x:Name="ColorRect" Visibility="Visible" HorizontalAlignment="Left" Width="12" Margin="16,28,0,12" CornerRadius="4" Grid.Row="2"  Background="#FFc70039">
+            <Border x:Name="ColorRect" Visibility="Visible" HorizontalAlignment="Left" Width="12" Margin="16,25,0,16" CornerRadius="4" Grid.Row="2"  Background="#FFc70039">
                 <Border.BackgroundTransition>
                     <BrushTransition />
                 </Border.BackgroundTransition>
@@ -238,19 +238,23 @@
 
                 </Grid>
             </Border>
-            <ListView x:Name="ColorFormatsList" SelectionMode="None" Margin="0,16,0,0" Grid.Column="1">
-                <ListView.Transitions>
-                    
-                </ListView.Transitions>
+            <ListView x:Name="ColorFormatsList"
+                      SelectionMode="None"
+                      Margin="0,0,0,0"
+                      Padding="0,16,0,16"
+                      Grid.Column="1"
+                      Transitions="{x:Null}"
+                      ItemContainerTransitions="{x:Null}">
+             
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:ColorCode">
-                        <Grid CornerRadius="4" Margin="0,12,0,0" Padding="4" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                        <Grid CornerRadius="4" Margin="0,8,0,0" Padding="4" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="78" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="48" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock FontWeight="SemiBold" Margin="12,0,0,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind Name}" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                            <TextBlock FontWeight="SemiBold" FontSize="11" Margin="12,0,0,0" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind Name}" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
                             <TextBlock VerticalAlignment="Center" Text="{x:Bind Format}" Grid.Column="1" IsTextSelectionEnabled="True" FontWeight="SemiBold" />
                             <Button HorizontalAlignment="Right" x:Name="CopyToClipboard" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Grid.Column="2" Click="CopyToClipboard_Click" FontFamily="Segoe Fluent Icons" Content="&#xE16F;" Background="Transparent" Height="36" BorderBrush="Transparent" BorderThickness="1" />
                         </Grid>

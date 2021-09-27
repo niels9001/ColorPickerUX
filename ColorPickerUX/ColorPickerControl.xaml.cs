@@ -160,7 +160,13 @@ namespace ColorPickerUX
         {
             AddColor(new Color() { R = 134, G = 163, B = 195, A = 255 }); ;
             AddColor(new Color() { R = 182, G = 206, B = 199, A = 255 });
-        }
+
+            AddColor(new Color() { R = 3, G = 63, B = 99, A = 255 });
+            AddColor(new Color() { R = 40, G = 102, B = 110, A = 255 });
+
+            AddColor(new Color() { R = 124, G = 152, B = 133, A = 255 });
+
+            }
 
         private void CopyToClipboard_Click(object sender, RoutedEventArgs e)
         {
